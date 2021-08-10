@@ -200,4 +200,16 @@ describe('.chain', () => {
 
     expect(() => chain(expectMock)('hello').toBe('hi')).toThrowErrorMatchingInlineSnapshot('"blah"');
   });
+
+  it('throws original error when it does not fail the matcher', () => {
+    expect.assertions(1);
+    const expectMock = jest.fn(() => ({
+      toBe: () => {
+        const error = new Error('original error');
+        throw error;
+      }
+    }));
+
+    expect(() => chain(expectMock)('hello').toBe('hi')).toThrowErrorMatchingInlineSnapshot('"original error"');
+  });
 });
