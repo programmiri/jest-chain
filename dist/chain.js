@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
@@ -14,6 +14,7 @@ class JestAssertionError extends Error {
       Error.captureStackTrace(this, callsite);
     }
   }
+
 }
 
 const chainMatchers = (matchers, originalMatchers = matchers) => {
@@ -40,6 +41,7 @@ const chainMatchers = (matchers, originalMatchers = matchers) => {
 
     return {
       [name]: chainMatchers(matcher, originalMatchers) // recurse on .not/.resolves/.rejects
+
     };
   });
   return Object.assign({}, ...mappedMatchers);
@@ -47,9 +49,8 @@ const chainMatchers = (matchers, originalMatchers = matchers) => {
 
 var _default = expect => {
   // proxy the expect function
-  let expectProxy = Object.assign(
-    (...args) => chainMatchers(expect(...args)), // partially apply expect to get all matchers and chain them
-    expect // clone additional properties on expect
+  let expectProxy = Object.assign((...args) => chainMatchers(expect(...args)), // partially apply expect to get all matchers and chain them
+  expect // clone additional properties on expect
   );
 
   expectProxy.extend = o => {
